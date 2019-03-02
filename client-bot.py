@@ -44,6 +44,7 @@ class CoffeeBot:
         query = update.callback_query
         selected_item = {}
 
+        # TODO: improve speed
         if query.data == 'm1':
 
             selected_item["name"] = "Капучино"
@@ -78,7 +79,13 @@ class CoffeeBot:
             with open('items.json', 'w', encoding='utf-8') as f:
                 f.write(json.dumps(self.cart, ensure_ascii=False))
             query.edit_message_text(text="Вы сделали свой заказ\nНажмите /order, чтобы перейти к оплате")
-            return
+
+            # self.order(bot, update)
+
+
+
+
+
 
         self.cart.append(selected_item)
         print(self.cart)
@@ -114,6 +121,8 @@ class CoffeeBot:
     def successful_payment_callback(self, bot, update):
         update.message.reply_text("Благодарим вас за оплату")
         print(self.precheckout_callback())
+
+
 
 
 # Launch all necessary functions and handlers
